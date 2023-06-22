@@ -37,7 +37,7 @@ lsp.set_server_config({
 
 lsp.ensure_installed {
     'tsserver', 'eslint', 'rust_analyzer', 'lua_ls', 'bashls', 'clangd',
-    'csharp_ls', 'bashls'
+    'csharp_ls'
 }
 
 -- lsp specific configs
