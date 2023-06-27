@@ -83,6 +83,10 @@ lsp.setup_nvim_cmp({ mapping = cmp_mappings })
 
 lsp.setup()
 
+require("mason-nvim-dap").setup({
+    ensure_installed = { "cppdbg", "bash", "coreclr", "js", "codelldb" }
+})
+
 local null_ls = require("null-ls")
 require('mason-null-ls').setup({
     ensure_installed = { "clang_format", "rustfmt", "lua_format", "commitlint" },

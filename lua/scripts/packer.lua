@@ -34,6 +34,13 @@ return require('packer').startup(function(use)
             'nvim-telescope/telescope.nvim'
         }
     }
+    use {
+        'nvim-telescope/telescope-dap.nvim',
+        requires = {
+            'nvim-telescope/telescope.nvim'
+        },
+        after = 'nvim-dap'
+    }
 
     use('mbbill/undotree')
 
@@ -66,6 +73,17 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' }
         }
     }
+
+    -- DAP
+    use 'mfussenegger/nvim-dap'
+    use({
+        'jay-babu/mason-nvim-dap.nvim',
+        requires = {
+            'mfussengger/nvim-dap',
+            'williamboman/mason.nvim',
+        }
+    })
+
 
     -- Utility
     use { 'm4xshen/autoclose.nvim' }
