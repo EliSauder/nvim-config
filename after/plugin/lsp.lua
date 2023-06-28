@@ -84,7 +84,12 @@ lsp.setup_nvim_cmp({ mapping = cmp_mappings })
 lsp.setup()
 
 require("mason-nvim-dap").setup({
-    ensure_installed = { "cppdbg", "bash", "coreclr", "js", "codelldb" }
+    ensure_installed = { "cppdbg", "bash", "coreclr", "js", "codelldb" },
+    handlers = {
+        function(config)
+            require('mason-nvim-dap').default_setup(config)
+        end,
+    }
 })
 
 local null_ls = require("null-ls")

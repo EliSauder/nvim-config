@@ -83,6 +83,17 @@ return require('packer').startup(function(use)
             'williamboman/mason.nvim',
         }
     })
+    use({
+        'theHamsta/nvim-dap-virtual-text',
+        requires = {
+            'mfussenegger/nvim-dap',
+            'nvim-treesitter/nvim-treesitter'
+        }
+    })
+    use({
+        'rcarriga/nvim-dap-ui',
+        requires = { 'mfussenegger/nvim-dap'}
+    })
 
 
     -- Utility
