@@ -85,11 +85,7 @@ lsp.setup()
 
 require("mason-nvim-dap").setup({
     ensure_installed = { "cppdbg", "bash", "coreclr", "js", "codelldb" },
-    handlers = {
-        function(config)
-            require('mason-nvim-dap').default_setup(config)
-        end,
-    }
+    handlers = {}
 })
 
 local null_ls = require("null-ls")
