@@ -27,7 +27,7 @@ local on_attach_func = function(client, bufnr)
     end, opts)
 end
 
-lsp.on_attach(on_attach_func(client, bufnr));
+lsp.on_attach(on_attach_func);
 
 lsp.set_server_config({
     on_init = function(client)
@@ -54,6 +54,7 @@ lspconfig.yamlls.setup {
         }
     }
 }
+lspconfig.kotlin_language_server.setup {}
 lspconfig.csharp_ls.setup {
     handlers = {
         ["textDocument/definition"] = require('csharpls_extended').handler
@@ -65,6 +66,14 @@ lspconfig.csharp_ls.setup {
         if client.server_capabilities.documentRangeFormattingProvider then
             client.server_capabilities.documentRangeFormattingProvider = false
         end
+
+        on_attach_func(client, bufnr)
+    end
+}
+lspconfig.clangd.setup {
+    on_attach = function(client, bufnr)
+        local opts = { buffer = bufnr, remap = false }
+        vim.keymap.set("n", "gh", ":ClangdSwitchSourceHeader<CR>", opts)
 
         on_attach_func(client, bufnr)
     end
@@ -90,15 +99,8 @@ require("mason-nvim-dap").setup({
 
 local null_ls = require("null-ls")
 require('mason-null-ls').setup({
-    ensure_installed = { "clang_format", "rustfmt", "lua_format", "commitlint" },
+    ensure_installed = { "lua_format", "commitlint" },
     automatic_installation = true,
-    handlers = {
-        clang_format = function()
-            null_ls.register(null_ls.builtins.formatting.clang_format.with({
-                extra_args = { "-style=file" }
-            }))
-        end
-    }
 })
 
 null_ls.setup({ sources = {} })

@@ -39,15 +39,24 @@ vim.keymap.set("n", "?", "L")
 vim.keymap.set("v", "?", "L")
 
 -- Keymaps for moving selection
-vim.keymap.set("v", "<", ":m '>+1<CR>gv=gv'")
-vim.keymap.set("v", ">", ":m '<-2<CR>gv=gv'")
+vim.keymap.set("n", "<", ":MoveLine(1)<CR>")
+vim.keymap.set("n", ">", ":MoveLine(-1)<CR>")
+vim.keymap.set("n", "M", ":MoveHChar(-1)<CR>")
+vim.keymap.set("n", "?", ":MoveHChar(1)<CR>")
+vim.keymap.set("n", "<A-m>", ":MoveWord(-1)<CR>")
+vim.keymap.set("n", "<A-/>", ":MoveWord(1)<CR>")
+
+vim.keymap.set("v", "<", ":MoveBlock(1)<CR>")
+vim.keymap.set("v", ">", ":MoveBlock(-1)<CR>")
+vim.keymap.set("v", "M", ":MoveHBlock(-1)<CR>")
+vim.keymap.set("v", "?", ":MoveHBlock(1)<CR>")
 
 -- Keeps the cursor in place when post pending
-vim.keymap.set("n", "<", "mzJ`z")
+-- vim.keymap.set("n", "<", "mzJ`z")
 
--- Keep cursor in middle when jumping up or down
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+---- Keep cursor in middle when jumping up or down
+--vim.keymap.set("n", "<C-d>", "<C-d>zz")
+--vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Keep current search in the center of the screen
 vim.keymap.set("n", "n", "nzzzv")

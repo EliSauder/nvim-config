@@ -2,7 +2,6 @@
 -- vim.cmd.packadd('packer.nvim')
 
 return require('packer').startup(function(use)
-
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
@@ -29,7 +28,8 @@ return require('packer').startup(function(use)
     }
     use {
         'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'cmake -S. Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake -- install build --prefix build',
+        run =
+        'cmake -S. Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake -- install build --prefix build',
         requires = {
             'nvim-telescope/telescope.nvim'
         }
@@ -42,7 +42,9 @@ return require('packer').startup(function(use)
         after = 'nvim-dap'
     }
 
+    -- Editing
     use('mbbill/undotree')
+    use 'fedepujol/move.nvim'
 
     -- Git
     use('tpope/vim-fugitive')
@@ -64,15 +66,16 @@ return require('packer').startup(function(use)
                 config = function() require('null-ls').setup() end,
                 requires = { "nvim-lua/plenary.nvim" }
             }, { 'jayp0521/mason-null-ls.nvim' }, -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },             -- Required
-            { 'hrsh7th/cmp-nvim-lsp' },         -- Required
-            { 'L3MON4D3/LuaSnip' },             -- Required
+            { 'hrsh7th/nvim-cmp' },               -- Required
+            { 'hrsh7th/cmp-nvim-lsp' },           -- Required
+            { 'L3MON4D3/LuaSnip' },               -- Required
             { 'hrsh7th/cmp-buffer' }, { 'hrsh7th/cmp-path' },
             { 'saadparwaiz1/cmp_luasnip' }, { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-nvim-lua' }, { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' }
         }
     }
+    use 'mfussenegger/nvim-jdtls'
 
     -- DAP
     use 'mfussenegger/nvim-dap'
@@ -99,6 +102,7 @@ return require('packer').startup(function(use)
     -- Utility
     use { 'm4xshen/autoclose.nvim' }
     use { 'Decodetalkers/csharpls-extended-lsp.nvim' }
+    use { "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" }
 
     -- visual
     use({
@@ -118,6 +122,7 @@ return require('packer').startup(function(use)
         },
         after = 'nvim-web-devicons',
     })
+    use 'karb94/neoscroll.nvim'
 
     -- Training
     use('ThePrimeagen/vim-be-good')
