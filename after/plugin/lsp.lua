@@ -42,8 +42,21 @@ lsp.ensure_installed {
 
 -- lsp specific configs
 local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.rust_analyzer.setup {}
+lspconfig.arduino_language_server.setup {
+    cmd = {
+        "arduino-language-server",
+        "-cli-config", vim.fn.expand("~/Library/Arduino15/arduino-cli.yaml"),
+        "-format-conf-path",
+        require('lspconfig.util').root_pattern('.clang-format')(vim.fn.getcwd()) .. "/.clang-format"
+    }
+}
 lspconfig.ghdl_ls.setup {}
+lspconfig.kotlin_language_server.setup {}
+lspconfig.bufls.setup {
+    cmd = { vim.fn.expand("~/go/bin/bufls"), "serve" }
+}
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 lspconfig.yamlls.setup {
     settings = {
         yaml = {
@@ -54,7 +67,6 @@ lspconfig.yamlls.setup {
         }
     }
 }
-lspconfig.kotlin_language_server.setup {}
 lspconfig.csharp_ls.setup {
     handlers = {
         ["textDocument/definition"] = require('csharpls_extended').handler
@@ -71,6 +83,7 @@ lspconfig.csharp_ls.setup {
     end
 }
 lspconfig.clangd.setup {
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
     on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
         vim.keymap.set("n", "gh", ":ClangdSwitchSourceHeader<CR>", opts)
