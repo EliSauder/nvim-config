@@ -60,5 +60,17 @@ return {
         config = function()
             require('gitsigns').setup()
         end
+    },
+    {
+        "prichrd/netrw.nvim",
+        lazy = false,
+        dependencies = {
+            "devicons"
+        },
+        config = function()
+            require('netrw').setup({
+                use_devicons = true
+            })
+        end
     }
 }
