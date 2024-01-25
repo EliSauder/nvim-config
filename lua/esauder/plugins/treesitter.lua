@@ -1,6 +1,6 @@
 return {
-    { 
-        "nvim-treesitter/nvim-treesitter", 
+    {
+        "nvim-treesitter/nvim-treesitter",
         name = "treesitter",
         build = ":TSUpdate",
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },

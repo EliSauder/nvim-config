@@ -1,12 +1,22 @@
-local default_lsp_handler = function(server)
-    local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-    require("lspconfig")[server].setup({
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local default_settings = function()
+    return {
+        --on_init = function(client, _)
+        --    client.server_capabilities.semanticTokensProvider = nil
+        --end,
         capabilities = lsp_capabilities
-    })
+    }
+end
+local default_lsp_handler = function(server)
+    require("lspconfig")[server].setup(default_settings())
 end
 
 local arduino_lsp_handler = function()
+    local defaults = default_settings();
     require("lspconfig").arduino_language_server.setup({
+        capabilities = defaults.capabilities,
+        on_init = defaults.on_init,
         cmd = {
             "arduino-language-server",
             "-cli-config", vim.fn.expand("~/Library/Arduino15/arduino-cli.yaml"),
@@ -17,7 +27,10 @@ local arduino_lsp_handler = function()
 end
 
 local yamlls_lsp_handler = function()
+    local defaults = default_settings();
     require("lspconfig").yamlls.setup({
+        capabilities = defaults.capabilities,
+        on_init = defaults.on_init,
         settings = {
             yaml = {
                 keyOrdering = false,
@@ -30,7 +43,10 @@ local yamlls_lsp_handler = function()
 end
 
 local csharpls_lsp_handler = function()
+    local defaults = default_settings();
     require("lspconfig").csharp_ls.setup({
+        capabilities = defaults.capabilities,
+        on_init = defaults.on_init,
         handlers = {
             ["textDocument/definition"] = require('csharpls_extended').handler
         },
@@ -46,8 +62,33 @@ local csharpls_lsp_handler = function()
 end
 
 local clangd_lsp_handler = function()
+    local defaults = default_settings();
     require("lspconfig").clangd.setup({
+        capabilities = defaults.capabilities,
+        on_init = defaults.on_init,
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+    })
+end
+
+local luals_lsp_handler = function()
+    local defaults = default_settings();
+    require("lspconfig").lua_ls.setup({
+        capabilities = defaults.capabilities,
+        on_init = defaults.on_init,
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = {
+                        'vim'
+                    }
+                },
+                workspace = {
+                    library = {
+                        vim.env.VIMRUNTIME
+                    }
+                }
+            }
+        }
     })
 end
 
@@ -76,12 +117,23 @@ return {
                     csharp_ls = csharpls_lsp_handler,
                     yamlls = yamlls_lsp_handler,
                     arduino_language_server = arduino_lsp_handler,
+                    lua_ls = luals_lsp_handler,
                 }
             })
         end
     },
     {
         "neovim/nvim-lspconfig",
+        event = "BufAdd",
+        opt = {
+            diagnostics = {
+                underline = true,
+                severity_sort = true
+            },
+            inlay_hints = {
+                enabled = true
+            }
+        },
         dependencies = {
             "mason-lspconfig"
         }
@@ -113,6 +165,7 @@ return {
     {
         "williamboman/mason.nvim",
         name = "mason",
+        build = ":MasonUpdate",
         configure = function()
             require('mason').setup()
         end
