@@ -82,16 +82,55 @@ vim.keymap.set("n", "<leader>s",
 -- Project selection
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
---[[ LSP KEYMAPS ]]--
--- LSP formatter
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
-
 --[[ DEVELOPMENT KEYMAPS ]]--
 -- quick fix navigation
 vim.keymap.set("n", "<C-.>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-,>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>.", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>,", "<cmd>lprev<CR>zz")
+
+
+----------------------------------------------
+--[[              LSP KEYMAPS             ]]--
+----------------------------------------------
+vim.keymap.set("n", "<leader>vd",
+    function() vim.diagnostic.open_float() end, opts)
+vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('esauder', {}),
+    desc = 'LSP Keymaps',
+    callback = function(e) 
+        local client = vim.lsp.get_client_by_id(e.data.client_id)
+        local opts = { buffer = e.buf }
+
+        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+        vim.keymap.set("n", "<leader>vws",
+            function() vim.lsp.buf.workspace_symbol() end, opts)
+        vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end,
+            opts)
+        vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end,
+            opts)
+        vim.keymap
+            .set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end,
+            opts)
+        vim.keymap.set("n", "<leader>qf", function()
+            vim.lsp.buf.code_action({
+                filter = function(a) return a.isPreferred end,
+                apply = true
+            })
+        end, opts)
+
+        if client.name == "clangd" then
+            vim.keymap.set("n", "gh", ":ClangdSwitchSourceHeader<CR>", opts)
+        end
+
+    end
+})
 
 ----------------------------------------------
 --[[            PLUGIN KEYMAPS            ]]--
@@ -150,4 +189,9 @@ vim.keymap.set("n", "<leader>dc",
 
 --[[ GIT FUGITIVE ]]--
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "fugitive",
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, 'n', '.', 'k', { noremap = true, silent = true})
+    end
+})
