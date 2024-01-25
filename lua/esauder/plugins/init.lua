@@ -5,7 +5,18 @@ return {
     },
 
     -- Git
-    "tpope/vim-fugitive",
+    {
+        "tpope/vim-fugitive",
+        lazy = false,
+        config = function() 
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "fugitive",
+                callback = function()
+                    vim.api.nvim_buf_set_keymap(0, 'n', '.', 'k', { noremap = true, silent = true})
+                end
+            })
+        end 
+    },
 
     -- CSV
     {

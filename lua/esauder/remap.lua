@@ -1,5 +1,8 @@
+--[[ LEADER CONFIGURATION ]]--
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
+--[[ COLEMAK REMAPS ]]--
 -- remap chars that are being overwritten
 vim.keymap.set("n", "<leader>/", "/")
 vim.keymap.set("v", "<leader>/", "/")
@@ -38,6 +41,7 @@ vim.keymap.set("v", ">", "K")
 vim.keymap.set("n", "?", "L")
 vim.keymap.set("v", "?", "L")
 
+--[[ SELECTION MOVEMENT KEYMAPS ]]--
 -- Keymaps for moving selection
 vim.keymap.set("n", "<", ":MoveLine(1)<CR>")
 vim.keymap.set("n", ">", ":MoveLine(-1)<CR>")
@@ -55,9 +59,10 @@ vim.keymap.set("v", "?", ":MoveHBlock(1)<CR>")
 -- vim.keymap.set("n", "<", "mzJ`z")
 
 ---- Keep cursor in middle when jumping up or down
---vim.keymap.set("n", "<C-d>", "<C-d>zz")
---vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
+--[[ UTILITY KEYMAPS ]]--
 -- Keep current search in the center of the screen
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -70,18 +75,79 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>Y", "\"+Y")
 
+-- Replace word under cursor
+vim.keymap.set("n", "<leader>s",
+    ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+
 -- Project selection
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
+--[[ LSP KEYMAPS ]]--
 -- LSP formatter
 vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
 
+--[[ DEVELOPMENT KEYMAPS ]]--
 -- quick fix navigation
 vim.keymap.set("n", "<C-.>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-,>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>.", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>,", "<cmd>lprev<CR>zz")
 
--- Replace word under cursor
-vim.keymap.set("n", "<leader>s",
-    ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+----------------------------------------------
+--[[            PLUGIN KEYMAPS            ]]--
+----------------------------------------------
+
+--[[ TELESCOPE ]]--
+vim.keymap.set('n', '<leader>pf', 
+    function() 
+        require('telescope.builtin').find_files()
+    end, {})
+vim.keymap.set('n', '<C-p>', 
+    function() 
+        require('telescope.builtin').git_files()
+    end, {})
+vim.keymap.set('n', '<leader>ps', 
+    function() 
+        require('telescope.builtin').live_grep()
+    end, {})
+
+--[[ HAPOON ]]--
+-- Marks
+vim.keymap.set("n", "<leader>a", 
+    function() 
+        require("harpoon.mark").add_file()
+    end, {})
+vim.keymap.set("n", "<C-e>", 
+    function()
+        require("harpoon.ui").toggle_quick_menu()
+    end, {})
+-- UI Nav
+vim.keymap.set("n", "<C-h>", 
+    function() 
+        require("harpoon.ui").nav_file(1)
+    end, {})
+vim.keymap.set("n", "<C-t>", 
+    function() 
+        require("harpoon.ui").nav_file(2) 
+    end, {})
+vim.keymap.set("n", "<C-n>", 
+    function() 
+        require("harpoon.ui").nav_file(3) 
+    end, {})
+vim.keymap.set("n", "<C-s>", 
+    function() 
+        require("harpoon.ui").nav_file(4) 
+    end, {})
+
+--[[ UNDO TREE ]]--
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+--[[ NEOGEN ]]--
+vim.keymap.set("n", "<leader>dc", 
+    function() 
+        require('neogen').generate() 
+    end, {noremap = true, silent = true})
+
+--[[ GIT FUGITIVE ]]--
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+

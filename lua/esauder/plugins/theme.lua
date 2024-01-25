@@ -44,9 +44,21 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
+        lazy = false,
         dependencies = {
             "treesitter"
+        },
+        opts = {
+            options = {
+                theme = 'material-stealth'
+            }
         }
     },
-    "lewis6991/gitsigns.nvim",
+    {
+        "lewis6991/gitsigns.nvim",
+        lazy = false,
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
 }

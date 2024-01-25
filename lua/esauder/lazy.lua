@@ -11,4 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("esauder.plugins")
+require("lazy").setup("esauder.plugins", 
+    {
+        defaults = {
+            lazy = true
+        }
+    })
