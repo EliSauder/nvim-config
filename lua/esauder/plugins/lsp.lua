@@ -98,7 +98,6 @@ end
 return {
     {
         "williamboman/mason-lspconfig.nvim",
-        name = "mason-lspconfig",
         lazy = false,
         dependencies = {
             "neovim/nvim-lspconfig",
@@ -139,7 +138,7 @@ return {
             }
         },
         dependencies = {
-            "mason-lspconfig",
+            "williamboman/mason-lspconfig.nvim",
             "j-hui/fidget.nvim",
         }
     },
@@ -182,14 +181,7 @@ require('mason-null-ls').setup({
 null_ls.setup({ sources = {} })
 
     --]]
-    {
-        "williamboman/mason.nvim",
-        name = "mason",
-        build = ":MasonUpdate",
-        configure = function()
-            require('mason').setup()
-        end
-    },
+    "williamboman/mason.nvim",
 
     --[[ LANGUAGE SPECIFIC ]] --
     -- Java/Kotlin

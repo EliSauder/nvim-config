@@ -1,26 +1,25 @@
 return {
     {
         "mfussenegger/nvim-dap",
-        name = "dap"
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
         dependencies = {
-            "dap",
-            "mason"
+            "mfussenegger/nvim-dap",
+            "williamboman/mason.nvim"
         }
     },
     {
         "theHamsta/nvim-dap-virtual-text",
         dependencies = {
-            "dap",
-            "treesitter"
+            "mfussenegger/nvim-dap",
+            "nvim-treesitter/nvim-treesitter"
         }
     },
     {
         "rcarriga/nvim-dap-ui",
         dependencies = {
-            "dap"
+            "mfussenegger/nvim-dap"
         }
     },
 }

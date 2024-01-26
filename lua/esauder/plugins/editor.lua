@@ -2,7 +2,7 @@ return {
     {
         "theprimeagen/harpoon",
         dependencies = {
-            "plenary"
+            "mfussenegger/nvim-dap"
         },
     },
     {
@@ -10,9 +10,9 @@ return {
         name = "telescope",
         branch = "0.1.x",
         dependencies = {
-            "plenary",
-            "treesitter",
-            "devicons"
+            "mfussenegger/nvim-dap",
+            "mfussenegger/nvim-dap",
+            "nvim-tree/nvim-web-devicons"
         },
     },
     {
@@ -27,8 +27,8 @@ return {
     {
         "danymat/neogen",
         dependencies = {
-            "treesitter",
-            "luasnip"
+            "mfussenegger/nvim-dap",
+            "L3MON4D3/LuaSnip"
         },
         config = function()
             require('neogen').setup({
@@ -38,14 +38,12 @@ return {
     },
     {
         "nvim-tree/nvim-web-devicons",
-        name = "devicons",
         lazy = false,
         config = function()
             require("nvim-web-devicons").setup({
-                default = true;
-                strict = true;
+                default = true,
+                strict = true,
             })
         end
     }
 }
-    

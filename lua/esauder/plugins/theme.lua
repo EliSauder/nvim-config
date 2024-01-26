@@ -54,7 +54,7 @@ return {
         "nvim-lualine/lualine.nvim",
         lazy = false,
         dependencies = {
-            "treesitter"
+            "nvim-treesitter/nvim-treesitter"
         },
         opts = {
             options = {
@@ -73,7 +73,7 @@ return {
         "prichrd/netrw.nvim",
         lazy = false,
         dependencies = {
-            "devicons"
+            "nvim-tree/nvim-web-devicons"
         },
         config = function()
             require('netrw').setup({

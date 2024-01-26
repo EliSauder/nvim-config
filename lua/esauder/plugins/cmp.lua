@@ -1,8 +1,7 @@
 return {
     {
         "hrsh7th/nvim-cmp",
-        --event = "InsertEnter",
-        lazy = false,
+        event = "InsertEnter",
         dependencies = {
             "neovim/nvim-lspconfig",
             "hrsh7th/cmp-nvim-lsp",
@@ -42,9 +41,6 @@ return {
                     { name = 'conventionalcommits' },
                     { name = 'cmdline' },
                 }),
-                completion = {
-                    completeopt = 'menu,menuone',
-                },
                 sorting = {
                     comparators = {
                         cmp.config.compare.score
