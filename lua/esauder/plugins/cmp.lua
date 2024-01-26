@@ -12,6 +12,7 @@ return {
             "davidsierradz/cmp-conventionalcommits",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
+            "onsails/lspkind.nvim",
         },
         config = function()
             local cmp = require('cmp')
@@ -30,7 +31,22 @@ return {
                     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-Space>'] = cmp.mapping({
+                        i = function()
+                            if cmp.visible() then
+                                cmp.abort()
+                            else
+                                cmp.complete()
+                            end
+                        end,
+                        c = function()
+                            if cmp.visible() then
+                                cmp.close()
+                            else
+                                cmp.complete()
+                            end
+                        end,
+                    })
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
@@ -41,6 +57,22 @@ return {
                     { name = 'conventionalcommits' },
                     { name = 'cmdline' },
                 }),
+                formatting = {
+                    format = require('lspkind').cmp_format({
+                        mode = "symbol_text",
+                        maxwidth = 50,
+                        show_labelDetails = true,
+                        menu = ({
+                            buffer = "[Buffer]",
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[LuaSnip]",
+                            git = "[Git]",
+                            async_path = "[Path]",
+                            conventionalcommits = "[CC]",
+                            cmdline = "[Cmd]"
+                        })
+                    }),
+                },
                 sorting = {
                     comparators = {
                         cmp.config.compare.score

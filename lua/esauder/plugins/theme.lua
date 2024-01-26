@@ -3,8 +3,6 @@ return {
     {
         "marko-cerovac/material.nvim",
         lazy = true,
-        opts = {
-        },
         config = function()
             require('material').setup({
                 contrast = {
