@@ -16,13 +16,14 @@ return {
                 },
                 -- TODO: Setup
                 plugins = {
-                    "nvim-cmp",
-                    "telescope",
+                    "dap",
+                    "fidget",
                     "gitsigns",
-                    "nvim-web-devicons",
                     "harpoon",
-                    "trouble",
-                    "dap"
+                    "nvim-cmp",
+                    "nvim-web-devicons",
+                    "telescope",
+                    "trouble"
                 },
                 disable = {
                     background = true
