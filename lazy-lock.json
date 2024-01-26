@@ -10,6 +10,7 @@
   "csharpls-extended-lsp.nvim": { "branch": "master", "commit": "bde4aebe0dc74952188c2130c6831a1d8e4ce5c6" },
   "dap": { "branch": "master", "commit": "9adbfdca13afbe646d09a8d7a86d5d031fb9c5a5" },
   "devicons": { "branch": "master", "commit": "b427ac5f9dff494f839e81441fb3f04a58cbcfbc" },
+  "fidget.nvim": { "branch": "main", "commit": "3a93300c076109d86c7ce35ec67a8034ae6ba9db" },
   "friendly-snippets": { "branch": "main", "commit": "aced40b66b7bae9bc2c37fd7b11841d54727a7b0" },
   "gitsigns.nvim": { "branch": "main", "commit": "0a2a93f687ec051292943a4d139366332ac93688" },
   "harpoon": { "branch": "master", "commit": "ccae1b9bec717ae284906b0bf83d720e59d12b91" },

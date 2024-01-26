@@ -32,10 +32,18 @@ return {
                 },
                 async_loading = true,
                 custom_highlights = {
-                    LineNr = { fg = "#007789" },
+                    LineNr = { fg = "#0B9FB6" },
+                    CursorLine = {
+                        bg = "#243A41",
+                        underline = true,
+                    },
+                    CursorColumn = {
+                        bg = "#243A41",
+                        underline = false,
+                    }
                 },
                 custom_colors = function(colors)
-                    colors.editor.selection = "#22255b"
+                    colors.editor.selection = "#363A92"
                 end,
             })
 

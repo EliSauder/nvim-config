@@ -1,8 +1,7 @@
---[[ LEADER CONFIGURATION ]]--
-
+--[[ LEADER CONFIGURATION ]]
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
---[[ COLEMAK REMAPS ]]--
+--[[ COLEMAK REMAPS ]]
 -- remap chars that are being overwritten
 vim.keymap.set("n", "<leader>/", "/")
 vim.keymap.set("v", "<leader>/", "/")
@@ -41,7 +40,7 @@ vim.keymap.set("v", ">", "K")
 vim.keymap.set("n", "?", "L")
 vim.keymap.set("v", "?", "L")
 
---[[ SELECTION MOVEMENT KEYMAPS ]]--
+--[[ SELECTION MOVEMENT KEYMAPS ]]
 -- Keymaps for moving selection
 vim.keymap.set("n", "<", ":MoveLine(1)<CR>")
 vim.keymap.set("n", ">", ":MoveLine(-1)<CR>")
@@ -62,7 +61,7 @@ vim.keymap.set("v", "?", ":MoveHBlock(1)<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
---[[ UTILITY KEYMAPS ]]--
+--[[ UTILITY KEYMAPS ]]
 -- Keep current search in the center of the screen
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -82,16 +81,15 @@ vim.keymap.set("n", "<leader>s",
 -- Project selection
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
---[[ DEVELOPMENT KEYMAPS ]]--
+--[[ DEVELOPMENT KEYMAPS ]]
 -- quick fix navigation
 vim.keymap.set("n", "<C-.>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-,>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>.", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>,", "<cmd>lprev<CR>zz")
 
-
 ----------------------------------------------
---[[              LSP KEYMAPS             ]]--
+--[[              LSP KEYMAPS             ]]
 ----------------------------------------------
 vim.keymap.set("n", "<leader>vd",
     function() vim.diagnostic.open_float() end, opts)
@@ -102,7 +100,7 @@ vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('esauder', {}),
     desc = 'LSP Keymaps',
-    callback = function(e) 
+    callback = function(e)
         local client = vim.lsp.get_client_by_id(e.data.client_id)
         local opts = { buffer = e.buf }
 
@@ -128,70 +126,72 @@ vim.api.nvim_create_autocmd('LspAttach', {
         if client.name == "clangd" then
             vim.keymap.set("n", "gh", ":ClangdSwitchSourceHeader<CR>", opts)
         end
-
     end
 })
 
 ----------------------------------------------
---[[            PLUGIN KEYMAPS            ]]--
+--[[            PLUGIN KEYMAPS            ]]
 ----------------------------------------------
 
---[[ TELESCOPE ]]--
-vim.keymap.set('n', '<leader>pf', 
-    function() 
+--[[ TELESCOPE ]]
+vim.keymap.set('n', '<leader>pf',
+    function()
         require('telescope.builtin').find_files()
     end, {})
-vim.keymap.set('n', '<C-p>', 
-    function() 
+vim.keymap.set('n', '<C-p>',
+    function()
         require('telescope.builtin').git_files()
     end, {})
-vim.keymap.set('n', '<leader>ps', 
-    function() 
+vim.keymap.set('n', '<leader>ps',
+    function()
         require('telescope.builtin').live_grep()
     end, {})
 
---[[ HAPOON ]]--
+--[[ HAPOON ]]
 -- Marks
-vim.keymap.set("n", "<leader>a", 
-    function() 
+vim.keymap.set("n", "<leader>a",
+    function()
         require("harpoon.mark").add_file()
     end, {})
-vim.keymap.set("n", "<C-e>", 
+vim.keymap.set("n", "<C-e>",
     function()
         require("harpoon.ui").toggle_quick_menu()
     end, {})
 -- UI Nav
-vim.keymap.set("n", "<C-h>", 
-    function() 
+vim.keymap.set("n", "<C-h>",
+    function()
         require("harpoon.ui").nav_file(1)
     end, {})
-vim.keymap.set("n", "<C-t>", 
-    function() 
-        require("harpoon.ui").nav_file(2) 
+vim.keymap.set("n", "<C-t>",
+    function()
+        require("harpoon.ui").nav_file(2)
     end, {})
-vim.keymap.set("n", "<C-n>", 
-    function() 
-        require("harpoon.ui").nav_file(3) 
+vim.keymap.set("n", "<C-n>",
+    function()
+        require("harpoon.ui").nav_file(3)
     end, {})
-vim.keymap.set("n", "<C-s>", 
-    function() 
-        require("harpoon.ui").nav_file(4) 
+vim.keymap.set("n", "<C-s>",
+    function()
+        require("harpoon.ui").nav_file(4)
     end, {})
 
---[[ UNDO TREE ]]--
+--[[ UNDO TREE ]]
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
---[[ NEOGEN ]]--
-vim.keymap.set("n", "<leader>dc", 
-    function() 
-        require('neogen').generate() 
-    end, {noremap = true, silent = true})
+--[[ NEOGEN ]]
+vim.keymap.set("n", "<leader>dc",
+    function()
+        require('neogen').generate()
+    end, { noremap = true, silent = true })
 
---[[ GIT FUGITIVE ]]--
+--[[ GIT FUGITIVE ]]
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "fugitive",
     callback = function()
-        vim.api.nvim_buf_set_keymap(0, 'n', '.', 'k', { noremap = true, silent = true})
+        vim.api.nvim_buf_set_keymap(0, 'n', '.', 'k', { noremap = true, silent = true })
     end
 })
+
+--[[ CMP ]]
+

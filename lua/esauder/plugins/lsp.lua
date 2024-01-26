@@ -1,13 +1,13 @@
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
+----------------------
+--[[ LSP HANDLERS ]]
+----------------------
 local default_settings = function()
+    local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
     return {
-        --on_init = function(client, _)
-        --    client.server_capabilities.semanticTokensProvider = nil
-        --end,
         capabilities = lsp_capabilities
     }
 end
+
 local default_lsp_handler = function(server)
     require("lspconfig")[server].setup(default_settings())
 end
@@ -24,7 +24,6 @@ local arduino_lsp_handler = function()
             require('lspconfig.util').root_pattern('.clang-format')(vim.fn.getcwd()) .. "/.clang-format"
         }
     })
-end
 
 local yamlls_lsp_handler = function()
     local defaults = default_settings();
@@ -92,6 +91,9 @@ local luals_lsp_handler = function()
     })
 end
 
+----------------------
+--[[ PLUGIN SETUP ]]
+----------------------
 return {
     {
         "williamboman/mason-lspconfig.nvim",
@@ -99,7 +101,8 @@ return {
         lazy = false,
         dependencies = {
             "neovim/nvim-lspconfig",
-            "williamboman/mason.nvim"
+            "williamboman/mason.nvim",
+            "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
             require("mason").setup()
@@ -135,7 +138,8 @@ return {
             }
         },
         dependencies = {
-            "mason-lspconfig"
+            "mason-lspconfig",
+            "j-hui/fidget.nvim",
         }
     },
     {
@@ -158,7 +162,7 @@ return {
                     "lua_format",
                     "commitlint",
                 },
-                automatic_installation = false
+                automatic_installation = false,
             })
         end
     },
@@ -170,6 +174,7 @@ return {
             require('mason').setup()
         end
     },
+
     --[[ LANGUAGE SPECIFIC ]] --
     -- Java/Kotlin
     {
@@ -178,5 +183,13 @@ return {
     -- C#
     {
         "Decodetalkers/csharpls-extended-lsp.nvim"
+    },
+
+    --[[ FEEDBACK ]] --
+    {
+        "j-hui/fidget.nvim",
+        config = function()
+            require('fidget').setup()
+        end
     }
 }
