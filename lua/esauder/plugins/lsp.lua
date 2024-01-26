@@ -24,6 +24,7 @@ local arduino_lsp_handler = function()
             require('lspconfig.util').root_pattern('.clang-format')(vim.fn.getcwd()) .. "/.clang-format"
         }
     })
+end
 
 local yamlls_lsp_handler = function()
     local defaults = default_settings();
@@ -166,6 +167,21 @@ return {
             })
         end
     },
+    --[[
+    --require("mason-nvim-dap").setup({
+    ensure_installed = { "cppdbg", "bash", "coreclr", "js", "codelldb" },
+    handlers = {}
+})
+
+local null_ls = require("null-ls")
+require('mason-null-ls').setup({
+    ensure_installed = { "lua_format", "commitlint" },
+    automatic_installation = true,
+})
+
+null_ls.setup({ sources = {} })
+
+    --]]
     {
         "williamboman/mason.nvim",
         name = "mason",
