@@ -42,7 +42,7 @@ return {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "nvim-treesitter/nvim-treesitter",
         },
-        configure = function()
+        config = function()
             require("nvim-surround").setup({})
         end
     },
