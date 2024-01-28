@@ -53,6 +53,7 @@ return {
                         function()
                             if cmp.visible() then
                                 cmp.confirm({ select = true })
+                                require('nvim-autopairs.completion.cmp').on_confirm_done()
                             elseif luasnip.expandable() then
                                 luasnip.expand()
                             end

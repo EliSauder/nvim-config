@@ -57,7 +57,7 @@ vim.keymap.set("v", "?", ":MoveHBlock(1)<CR>")
 -- Keeps the cursor in place when post pending
 -- vim.keymap.set("n", "<", "mzJ`z")
 
----- Keep cursor in middle when jumping up or down
+-- Keep cursor in middle when jumping up or down
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
@@ -82,19 +82,24 @@ vim.keymap.set("n", "<leader>s",
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 --[[ DEVELOPMENT KEYMAPS ]]
--- quick fix navigation
-vim.keymap.set("n", "<C-.>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-,>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>.", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>,", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "X", function() require("trouble").first({ skip_groups = true, jump = true }) end)
+vim.keymap.set("n", "<leader>X", function() require("trouble").last({ skip_groups = true, jump = true }) end)
+vim.keymap.set("n", "<C-.>", function() require("trouble").next({ skip_groups = true, jump = true }) end)
+vim.keymap.set("n", "<C-,>", function() require("trouble").previous({ skip_groups = true, jump = true }) end)
+--vim.keymap.set("n", "<C-.>", "<cmd>cnext<CR>zz")
+--vim.keymap.set("n", "<C-,>", "<cmd>cprev<CR>zz")
+--vim.keymap.set("n", "<leader>.", "<cmd>lnext<CR>zz")
+--vim.keymap.set("n", "<leader>,", "<cmd>lprev<CR>zz")
 
 ----------------------------------------------
 --[[              LSP KEYMAPS             ]]
 ----------------------------------------------
-vim.keymap.set("n", "<leader>vd",
-    function() vim.diagnostic.open_float() end, opts)
-vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -110,8 +115,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
             function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end,
             opts)
-        vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end,
-            opts)
+        vim.keymap.set("n", "<leader>vrr", function() require("trouble").toggle("lsp_references") end, opts)
+        --vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end,
+        --    opts)
         vim.keymap
             .set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end,
@@ -122,6 +128,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 apply = true
             })
         end, opts)
+        vim.keymap.set("n", "<leader>vd",
+            function() vim.diagnostic.open_float() end, opts)
+        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 
         if client.name == "clangd" then
             vim.keymap.set("n", "gh", ":ClangdSwitchSourceHeader<CR>", opts)

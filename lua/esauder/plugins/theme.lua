@@ -2,7 +2,7 @@ return {
     -- Theme
     {
         "marko-cerovac/material.nvim",
-        lazy = true,
+        branch = "main",
         config = function()
             require('material').setup({
                 contrast = {
@@ -51,9 +51,11 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
-        lazy = false,
+        branch = "master",
+        event = "VeryLazy",
         dependencies = {
-            "nvim-treesitter/nvim-treesitter"
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
         },
         opts = {
             options = {
@@ -63,13 +65,15 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
-        lazy = false,
+        version = "*",
+        event = "VeryLazy",
         config = function()
             require('gitsigns').setup()
         end
     },
     {
         "prichrd/netrw.nvim",
+        branch = "master",
         lazy = false,
         dependencies = {
             "nvim-tree/nvim-web-devicons"

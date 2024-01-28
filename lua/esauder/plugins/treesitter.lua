@@ -1,9 +1,10 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        version = "*",
         build = ":TSUpdate",
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-        config = function(opts)
+        config = function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = {
                     "c",
@@ -39,15 +40,24 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
+        branch = "master",
+        event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter"
         },
         config = function()
-            require('treesitter-context').setup()
+            require('treesitter-context').setup({
+                enable = true,
+                max_lines = 2,
+                multiline_threashold = 2,
+            })
+            vim.cmd("hi TreesitterContextBottom gui=underline guisp=Grey")
+            vim.cmd("hi TreesitterContextLineNumberBottom gui=underline guisp=Grey")
         end
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "master",
         dependencies = {
             "nvim-treesitter/nvim-treesitter"
         },

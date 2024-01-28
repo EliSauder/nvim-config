@@ -1,31 +1,61 @@
 return {
     {
         "theprimeagen/harpoon",
+        branch = "master",
         dependencies = {
-            "mfussenegger/nvim-dap"
+            "nvim-lua/plenary.nvim"
         },
     },
     {
         "nvim-telescope/telescope.nvim",
-        name = "telescope",
         branch = "0.1.x",
         dependencies = {
             "mfussenegger/nvim-dap",
-            "mfussenegger/nvim-dap",
-            "nvim-tree/nvim-web-devicons"
+            "nvim-tree/nvim-web-devicons",
+            "theprimeagen/harpoon",
         },
+        config = function()
+            require('telescope').setup()
+            require('telescope').load_extension('harpoon')
+        end
     },
     {
         "mbbill/undotree",
-        lazy = false
+        branch = "master",
+        event = "VeryLazy"
     },
     {
         "fedepujol/move.nvim",
-        lazy = false,
+        branch = "main",
+        event = "VeryLazy"
     },
-    "folke/trouble.nvim",
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {}
+    },
+    {
+        "kylechui/nvim-surround",
+        event = "VeryLazy",
+        version = "*",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        configure = function()
+            require("nvim-surround").setup({})
+        end
+    },
+    {
+        "folke/trouble.nvim",
+        version = "*",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        }
+    },
     {
         "danymat/neogen",
+        version = "*",
         dependencies = {
             "mfussenegger/nvim-dap",
             "L3MON4D3/LuaSnip",
@@ -39,7 +69,7 @@ return {
     },
     {
         "nvim-tree/nvim-web-devicons",
-        lazy = false,
+        branch = "master",
         config = function()
             require("nvim-web-devicons").setup({
                 default = true,
