@@ -28,11 +28,12 @@ return {
         "danymat/neogen",
         dependencies = {
             "mfussenegger/nvim-dap",
-            "L3MON4D3/LuaSnip"
+            "L3MON4D3/LuaSnip",
+            "nvim-treesitter/nvim-treesitter"
         },
         config = function()
             require('neogen').setup({
-                snipped_engine = "luasnip"
+                snippet_engine = "luasnip"
             })
         end,
     },

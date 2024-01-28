@@ -17,20 +17,46 @@ return {
         config = function()
             local cmp = require('cmp')
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
+            local luasnip = require('luasnip')
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        require('luasnip').lsp_expand(args.body)
+                        luasnip.lsp_expand(args.body)
                     end
                 },
                 window = {
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
                 },
-                mapping = cmp.mapping.preset.insert({
-                    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                mapping = {
+                    ['<C-n>'] = cmp.mapping(
+                        function(fallback)
+                            if cmp.visible() then
+                                cmp.select_next_item(cmp_select)
+                            elseif luasnip.jumpable(1) then
+                                luasnip.jump(1)
+                            else
+                                fallback()
+                            end
+                        end, { "i", "s" }),
+                    ['<C-p>'] = cmp.mapping(
+                        function(fallback)
+                            if cmp.visible() then
+                                cmp.select_prev_item(cmp_select)
+                            elseif luasnip.jumpable(-1) then
+                                luasnip.jump(-1)
+                            else
+                                fallback()
+                            end
+                        end, { "i", "s" }),
+                    ['<C-y>'] = cmp.mapping(
+                        function()
+                            if cmp.visible() then
+                                cmp.confirm({ select = true })
+                            elseif luasnip.expandable() then
+                                luasnip.expand()
+                            end
+                        end, { "i", "s" }),
                     ['<C-Space>'] = cmp.mapping({
                         i = function()
                             if cmp.visible() then
@@ -39,15 +65,8 @@ return {
                                 cmp.complete()
                             end
                         end,
-                        c = function()
-                            if cmp.visible() then
-                                cmp.close()
-                            else
-                                cmp.complete()
-                            end
-                        end,
                     })
-                }),
+                },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = 'luasnip' },
