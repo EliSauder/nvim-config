@@ -13,12 +13,19 @@ return {
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
             "onsails/lspkind.nvim",
+            "lukas-reineke/cmp-under-comparator"
         },
         config = function()
             local cmp = require('cmp')
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             local luasnip = require('luasnip')
             cmp.setup({
+                performance = {
+                    max_view_entries = 15
+                },
+                completion = {
+                    keyword_length = 2
+                },
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)
@@ -95,7 +102,12 @@ return {
                 },
                 sorting = {
                     comparators = {
-                        cmp.config.compare.score
+                        cmp.config.compare.offset,
+                        cmp.config.compare.exact,
+                        cmp.config.compare.score,
+                        cmp.config.compare.recently_used,
+                        require("cmp-under-comparator").under,
+                        cmp.config.compare.kind,
                     }
                 }
             })
