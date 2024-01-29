@@ -3,7 +3,7 @@
 ------------------------
 local default_settings = function()
     local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-    return {capabilities = lsp_capabilities}
+    return { capabilities = lsp_capabilities }
 end
 
 local default_lsp_handler = function(server)
@@ -66,7 +66,7 @@ local clangd_lsp_handler = function()
     require("lspconfig").clangd.setup({
         capabilities = defaults.capabilities,
         on_init = defaults.on_init,
-        filetypes = {"c", "cpp", "objc", "objcpp", "cuda"}
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
     })
 end
 
@@ -77,8 +77,8 @@ local luals_lsp_handler = function()
         on_init = defaults.on_init,
         settings = {
             Lua = {
-                diagnostics = {globals = {'vim'}},
-                workspace = {library = {vim.env.VIMRUNTIME}}
+                diagnostics = { globals = { 'vim' } },
+                workspace = { library = { vim.env.VIMRUNTIME } }
             }
         }
     })
@@ -92,7 +92,7 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         version = "*",
-        event = {"BufReadPre", "BufNewFile"},
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "neovim/nvim-lspconfig", "williamboman/mason.nvim",
             "hrsh7th/cmp-nvim-lsp"
@@ -112,31 +112,29 @@ return {
                 }
             })
         end
-    }, {
+    },
+    {
         "jay-babu/mason-null-ls.nvim",
         version = "*",
-        event = {"BufReadPre", "BufNewFile"},
-        dependencies = {"nvimtools/none-ls.nvim", "williamboman/mason.nvim"},
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "nvimtools/none-ls.nvim", "williamboman/mason.nvim" },
         config = function()
             require('mason-null-ls').setup({
-                ensure_installed = {"commitlint", "clang-format"},
+                ensure_installed = { "commitlint", "clang-format" },
                 automatic_installation = false,
                 handlers = {}
             })
         end
-    }, {
-        "jay-babu/mason-nvim-dap.nvim",
-        event = {"BufReadPre", "BufNewFile"},
-        dependencies = {"williamboman/mason.nvim", "mfussenegger/nvim-dap"},
-        config = function()
-            require("mason-nvim-dap").setup({
-                ensure_installed = {"cppdbg", "bash", "coreclr", "codelldb"},
-                automatic_installation = false,
-                handlers = {}
-            })
-        end
-    }, {"mfussenegger/nvim-jdtls", version = "*"},
-    {"Decodetalkers/csharpls-extended-lsp.nvim", branch = "master"}, {
+    },
+    {
+        "mfussenegger/nvim-jdtls",
+        version = "*"
+    },
+    {
+        "Decodetalkers/csharpls-extended-lsp.nvim",
+        branch = "master"
+    },
+    {
         "j-hui/fidget.nvim",
         version = "*",
         config = function() require('fidget').setup() end
@@ -147,18 +145,18 @@ return {
         dependencies = {
             "williamboman/mason-lspconfig.nvim", "j-hui/fidget.nvim"
         },
-        event = {"BufReadPre", "BufNewFile"},
+        event = { "BufReadPre", "BufNewFile" },
         opt = {
-            diagnostics = {underline = true, severity_sort = true},
-            inlay_hints = {enabled = true}
+            diagnostics = { underline = true, severity_sort = true },
+            inlay_hints = { enabled = true }
         }
     }, {
-        "nvimtools/none-ls.nvim",
-        branch = "main",
-        dependencies = {"nvim-lua/plenary.nvim"}
-    }, {
-        "williamboman/mason.nvim",
-        version = "*",
-        config = function() require('mason').setup() end
-    }
+    "nvimtools/none-ls.nvim",
+    branch = "main",
+    dependencies = { "nvim-lua/plenary.nvim" }
+}, {
+    "williamboman/mason.nvim",
+    version = "*",
+    config = function() require('mason').setup() end
+}
 }
