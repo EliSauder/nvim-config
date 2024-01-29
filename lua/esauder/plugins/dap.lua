@@ -15,17 +15,7 @@ return {
                     "codelldb"
                 },
                 automatic_installation = false,
-                handlers = {
-                    coreclr = function()
-                        require("mason-nvim-dap").coreclr.setup({
-                            type = "executable",
-                            args = {
-                                "--interpreter=vscode"
-                            }
-                        })
-                    end
-
-                }
+                handlers = {}
             })
         end
     },
@@ -68,8 +58,5 @@ return {
     {
         "mfussenegger/nvim-dap",
         version = "*",
-        config = function()
-            require("dap").setup()
-        end
     },
 }

@@ -202,3 +202,15 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_buf_set_keymap(0, 'n', '.', 'k', { noremap = true, silent = true })
     end
 })
+
+--[[ DAP ]]
+vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end)
+vim.keymap.set('n', '<leader>db',
+    function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<leader>dsi', function() require('dap').step_into() end)
+vim.keymap.set('n', '<leader>dso', function() require('dap').step_over() end)
+vim.keymap.set('n', '<leader>dsu', function() require('dap').step_out() end)
+vim.keymap.set('n', '<leader>dst', function()
+    require('dap').terminate()
+    require('dap').close()
+end)
