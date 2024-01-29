@@ -38,7 +38,7 @@ return {
     },
     {
         "kylechui/nvim-surround",
-        event = "VeryLazy",
+        event = "InsertEnter",
         version = "*",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
