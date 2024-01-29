@@ -12,7 +12,8 @@ return {
                 ensure_installed = {
                     "bash",
                     "coreclr",
-                    "codelldb"
+                    "codelldb",
+                    "cpptools"
                 },
                 automatic_installation = false,
                 handlers = {}
