@@ -100,12 +100,13 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "rust_analyzer",
-                    "clangd",
                     "bashls",
-                    "lua_ls",
+                    "clangd",
+                    "cmake",
                     "csharp_ls",
-                    "cmake"
+                    "lua_ls",
+                    "rust_analyzer",
+                    "taplo",
                 },
                 handlers = {
                     default_lsp_handler,
