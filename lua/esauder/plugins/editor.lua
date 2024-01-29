@@ -5,6 +5,7 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim"
         },
+        opts = {}
     },
     {
         "nvim-telescope/telescope.nvim",
