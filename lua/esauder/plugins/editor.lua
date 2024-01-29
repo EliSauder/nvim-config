@@ -17,6 +17,7 @@ return {
         },
         config = function()
             require('telescope').setup()
+            require("telescope").load_extension("notify")
             require('telescope').load_extension('harpoon')
         end
     },
@@ -76,6 +77,20 @@ return {
                 default = true,
                 strict = true,
             })
+        end
+    },
+    {
+        "rcarriga/nvim-notify",
+        priority = 1000,
+        lazy = false,
+        config = function()
+            require("notify").setup({
+                background_colour = require("material.colors").backgrounds.floating_windows,
+                timeout = 3000,
+                render = "default",
+                stages = "fade"
+            })
+            vim.notify = require("notify")
         end
     }
 }
