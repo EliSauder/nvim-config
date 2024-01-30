@@ -113,7 +113,7 @@ return {
         config = function()
             require("notify").setup({
                 background_colour = require("material.colors").backgrounds.floating_windows,
-                timeout = 1000,
+                timeout = 2000,
                 render = "default",
                 stages = "fade"
             })
