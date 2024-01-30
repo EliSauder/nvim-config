@@ -109,7 +109,6 @@ end
 local commitlint_nonels_handler = function(_, _)
     local path = vim.fn.expand("$HOME/.config/commitlint/commitlint.config.js")
     local arg = "--config=" .. path
-    require("notify")(arg)
     require("null-ls").register(require("null-ls").builtins.diagnostics.commitlint.with({
         filetypes = {
             "gitcommit"
