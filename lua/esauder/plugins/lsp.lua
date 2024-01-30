@@ -106,6 +106,20 @@ local jsonls_lsp_handler = function()
     })
 end
 
+local commitlint_nonels_handler = function(_, _)
+    local path = vim.fn.expand("$HOME/.config/commitlint/commitlint.config.js")
+    local arg = "--config=" .. path
+    require("notify")(arg)
+    require("null-ls").register(require("null-ls").builtins.diagnostics.commitlint.with({
+        filetypes = {
+            "gitcommit"
+        },
+        extra_args = {
+            arg
+        }
+    }))
+end
+
 ------------------------
 -- [[ PLUGIN SETUP ]] --
 ------------------------
@@ -149,12 +163,7 @@ return {
     {
         "jay-babu/mason-null-ls.nvim",
         version = "*",
-        event = {
-            "BufReadPre",
-            "BufNewFile"
-        },
         dependencies = {
-            "nvimtools/none-ls.nvim",
             "williamboman/mason.nvim"
         },
         config = function()
@@ -165,7 +174,9 @@ return {
                     "yamlfmt"
                 },
                 automatic_installation = false,
-                handlers = {}
+                handlers = {
+                    commitlint = commitlint_nonels_handler
+                }
             })
         end
     },
@@ -202,11 +213,15 @@ return {
     },
     {
         "nvimtools/none-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
         branch = "main",
         dependencies = {
+            "jay-babu/mason-null-ls.nvim",
             "nvim-lua/plenary.nvim"
         },
-        opts = {}
+        config = function()
+            require("null-ls").setup({ sources = {} })
+        end
     },
     {
         "williamboman/mason.nvim",
