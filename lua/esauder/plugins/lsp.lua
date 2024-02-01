@@ -2,8 +2,14 @@
 -- [[ LSP HANDLERS ]] --
 ------------------------
 local default_settings = function()
-    local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-    return { capabilities = lsp_capabilities }
+    local lspsettings =
+        vim.tbl_deep_extend("force",
+            require("lspconfig").util.default_config,
+            {
+                capabilities = require("cmp_nvim_lsp")
+                    .default_capabilities()
+            })
+    return lspsettings
 end
 
 local default_lsp_handler = function(server)
@@ -86,6 +92,30 @@ local luals_lsp_handler = function()
     })
 end
 
+local gopls_lsp_handler = function()
+    local defaults = default_settings()
+    require("lspconfig").gopls.setup({
+        capabilities = defaults.capabilities,
+        on_init = defaults.on_init,
+        settings = {
+            gopls = {
+                completeUnimported = true,
+                usePlaceholders = true,
+                semanticTokens = true,
+                analyses = {
+                    unusedparams = true,
+                    unusedwrite = true,
+                    useany = true,
+                    shadow = true,
+                    fieldalignment = true,
+                },
+                staticcheck = true,
+
+            }
+        }
+    })
+end
+
 local jsonls_lsp_handler = function()
     local defaults = default_settings()
     require("lspconfig").jsonls.setup({
@@ -146,6 +176,7 @@ return {
                     "yamlls",
                     "rust_analyzer",
                     "taplo",
+                    "gopls",
                 },
                 handlers = {
                     default_lsp_handler,
@@ -154,7 +185,8 @@ return {
                     arduino_language_server = arduino_lsp_handler,
                     lua_ls = luals_lsp_handler,
                     yamlls = yamlls_lsp_handler,
-                    jsonls = jsonls_lsp_handler
+                    jsonls = jsonls_lsp_handler,
+                    gopls = gopls_lsp_handler
                 }
             })
         end
@@ -185,6 +217,10 @@ return {
     },
     {
         "Decodetalkers/csharpls-extended-lsp.nvim",
+        ft = {
+            "cs",
+            "csharp"
+        },
         branch = "master",
     },
     {

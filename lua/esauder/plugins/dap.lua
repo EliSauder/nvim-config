@@ -13,7 +13,8 @@ return {
                     "bash",
                     "coreclr",
                     "codelldb",
-                    "cpptools"
+                    "cpptools",
+                    "delve"
                 },
                 automatic_installation = false,
                 handlers = {}
@@ -55,6 +56,15 @@ return {
                 virt_text_pos = "inline"
             })
         end
+    },
+    {
+        "leoluz/nvim-dap-go",
+        branch = "main",
+        ft = "go",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+        },
+        opts = {}
     },
     {
         "mfussenegger/nvim-dap",
