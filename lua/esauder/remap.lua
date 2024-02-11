@@ -204,13 +204,13 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --[[ DAP ]]
-vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end)
-vim.keymap.set('n', '<leader>db',
+vim.keymap.set('n', '<leader>dac', function() require('dap').continue() end)
+vim.keymap.set('n', '<leader>dab',
     function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<leader>dsi', function() require('dap').step_into() end)
-vim.keymap.set('n', '<leader>dso', function() require('dap').step_over() end)
-vim.keymap.set('n', '<leader>dsu', function() require('dap').step_out() end)
-vim.keymap.set('n', '<leader>dst', function()
+vim.keymap.set('n', '<leader>dasi', function() require('dap').step_into() end)
+vim.keymap.set('n', '<leader>daso', function() require('dap').step_over() end)
+vim.keymap.set('n', '<leader>dasu', function() require('dap').step_out() end)
+vim.keymap.set('n', '<leader>dast', function()
     require('dap').terminate()
     require('dap').close()
 end)
