@@ -6,9 +6,11 @@ local default_settings = function()
         vim.tbl_deep_extend("force",
             require("lspconfig").util.default_config,
             {
-                capabilities = require("cmp_nvim_lsp")
-                    .default_capabilities()
+                capabilities = vim.tbl_deep_extend("force",
+                    vim.lsp.protocol.make_client_capabilities(),
+                    require("cmp_nvim_lsp").default_capabilities())
             })
+    lspsettings.capabilities.offset_encoding = "utf-8"
     return lspsettings
 end
 
@@ -18,6 +20,9 @@ end
 
 local arduino_lsp_handler = function()
     local defaults = default_settings();
+    defaults.capabilities.semanticTokensProvider = nil
+    defaults.capabilities.textDocument.semanticTokens = nil
+    defaults.capabilities.workspace.semanticTokens = nil
     require("lspconfig").arduino_language_server.setup({
         capabilities = defaults.capabilities,
         on_init = defaults.on_init,
@@ -166,6 +171,7 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
+                    "arduino_language_server",
                     "bashls",
                     "clangd",
                     "cmake",
