@@ -10,6 +10,7 @@ local default_settings = function()
                     vim.lsp.protocol.make_client_capabilities(),
                     require("cmp_nvim_lsp").default_capabilities())
             })
+    lspsettings.offsetEncodings = { "utf-8" }
     lspsettings.capabilities.offset_encoding = "utf-8"
     return lspsettings
 end
