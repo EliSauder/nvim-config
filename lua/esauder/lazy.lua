@@ -18,10 +18,4 @@ require("lazy").setup("esauder.plugins", {
     install = {
         colorscheme = nil
     },
-    checker = {
-        notify = true
-    },
-    change_detection = {
-        notify = true
-    }
 })

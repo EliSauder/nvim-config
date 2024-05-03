@@ -214,6 +214,3 @@ vim.keymap.set('n', '<leader>dast', function()
     require('dap').terminate()
     require('dap').close()
 end)
-
---[[ notify ]]
-vim.keymap.set('n', '<leader>n', function() require('telescope').extensions.notify.notify() end)
