@@ -133,7 +133,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 
-        if client.name == "clangd" then
+        if client ~= nil and client.name == "clangd" then
             vim.keymap.set("n", "gh", ":ClangdSwitchSourceHeader<CR>", opts)
         end
     end
@@ -161,7 +161,7 @@ vim.keymap.set('n', '<leader>ps',
 -- Marks
 vim.keymap.set("n", "<leader>a",
     function()
-        require("harpoon"):list():append()
+        require("harpoon"):list():add()
     end, {})
 vim.keymap.set("n", "<C-e>",
     function()

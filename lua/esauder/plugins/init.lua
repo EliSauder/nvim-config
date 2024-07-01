@@ -36,7 +36,7 @@ return {
     -- Local config
     {
         "folke/neoconf.nvim",
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             require("neoconf").setup()
         end

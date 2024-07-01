@@ -24,7 +24,6 @@ return {
                     max_view_entries = 15
                 },
                 completion = {
-                    keyword_length = 2
                 },
                 snippet = {
                     expand = function(args)
@@ -76,13 +75,13 @@ return {
                     })
                 },
                 sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = 'luasnip' },
-                    { name = 'buffer' },
-                    { name = 'async_path' },
-                    { name = 'git' },
-                    { name = 'conventionalcommits' },
-                    { name = 'cmdline' },
+                    { name = "nvim_lsp", priority = 8 },
+                    { name = 'luasnip', priority = 7, },
+                    { name = 'buffer', priority = 7 },
+                    { name = 'async_path', priority = 4 },
+                    { name = 'git', priority = 4 },
+                    { name = 'conventionalcommits', priority = 3 },
+                    { name = 'cmdline', priority = 2 },
                 }),
                 formatting = {
                     format = require('lspkind').cmp_format({
@@ -101,13 +100,16 @@ return {
                     }),
                 },
                 sorting = {
+                    priority_weight = 1.0,
                     comparators = {
-                        cmp.config.compare.offset,
-                        cmp.config.compare.exact,
-                        cmp.config.compare.score,
+                        cmp.config.compare.locality,
                         cmp.config.compare.recently_used,
+                        cmp.config.compare.score,
+                        cmp.config.compare.offset,
+                        cmp.config.compare.order,
+                        --cmp.config.compare.exact,
                         require("cmp-under-comparator").under,
-                        cmp.config.compare.kind,
+                        --cmp.config.compare.kind,
                     }
                 }
             })
