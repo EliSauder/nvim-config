@@ -43,7 +43,32 @@ local yamlls_lsp_handler = function()
         capabilities = defaults.capabilities,
         on_init = defaults.on_init,
         settings = {
+            redhat = {
+                telemetry = {
+                    enabled = false
+                }
+            },
             yaml = {
+                completion = true,
+                customTags = {},
+                disableAdditionalProperties = false,
+                hover = true,
+                maxItemsComputed = 5000,
+                schemaStore = {
+                    enable = true,
+                    url = "https://www.schemastore.org/api/json/catalog.json",
+                },
+                trace = {
+                    server = "off"
+                },
+                validate = true,
+                format = {
+                    enable = true,
+                    singleQuote = false,
+                    bracketSpacing = true,
+                    printWidth = 80,
+                    proseWrap = "preserve"
+                },
                 keyOrdering = false,
                 schemas = {
                     ["https://json.schemastore.org/clang-format.json"] = ".clang-format",
@@ -79,6 +104,16 @@ local clangd_lsp_handler = function()
     local defaults = default_settings();
     require("lspconfig").clangd.setup({
         capabilities = defaults.capabilities,
+        settings = {
+            clangd = {
+                checkUpdates = true,
+                detectExtensionConflicts = true,
+                enableCodeCompletion = true,
+                restartAfterCrash = true,
+                semanticHighlighting = true,
+                serverCompletionRanking = true,
+            }
+        },
         on_init = defaults.on_init,
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
     })
@@ -129,6 +164,9 @@ local jsonls_lsp_handler = function()
         on_init = defaults.on_init,
         settings = {
             json = {
+                schemaDownload = {
+                    enable = true,
+                },
                 schemas = {
                     description = ".NET appsettings",
                     fileMatch = {
@@ -184,6 +222,7 @@ return {
                     "rust_analyzer",
                     "taplo",
                     "gopls",
+                    "zls",
                 },
                 handlers = {
                     default_lsp_handler,

@@ -31,5 +31,14 @@ return {
             'RainbowDelimQuoted',
             'RainbowMultiDelim'
         }
+    },
+
+    -- Local config
+    {
+        "folke/neoconf.nvim",
+        lazy = false,
+        config = function()
+            require("neoconf").setup()
+        end
     }
 }

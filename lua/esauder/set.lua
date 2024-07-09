@@ -34,3 +34,5 @@ vim.opt.encoding = "utf-8"
 
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = false
+
+vim.highlight.priorities.semantic_tokens = 95

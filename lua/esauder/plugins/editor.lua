@@ -1,4 +1,5 @@
 return {
+
     {
         "theprimeagen/harpoon",
         branch = "harpoon2",
@@ -17,7 +18,6 @@ return {
         },
         config = function()
             require('telescope').setup()
-            require("telescope").load_extension("notify")
             require('telescope').load_extension('harpoon')
         end
     },
@@ -56,33 +56,6 @@ return {
         }
     },
     {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-            "hrsh7th/nvim-cmp"
-        },
-        config = function()
-            require("noice").setup({
-                lsp = {
-                    override = {
-                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                        ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true,
-                    },
-                },
-                presets = {
-                    bottom_search = true, -- use a classic bottom cmdline for search
-                    command_palette = false, -- position the cmdline and popupmenu together
-                    long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = false, -- add a border to hover docs and signature help
-                },
-            })
-        end
-    },
-    {
         "danymat/neogen",
         version = "*",
         dependencies = {
@@ -92,7 +65,15 @@ return {
         },
         config = function()
             require('neogen').setup({
-                snippet_engine = "luasnip"
+                enabled = true,
+                snippet_engine = "luasnip",
+                languages = {
+                    cs = {
+                        template = {
+                            annotation_convention = "xmldoc"
+                        }
+                    }
+                }
             })
         end,
     },
@@ -106,18 +87,4 @@ return {
             })
         end
     },
-    {
-        "rcarriga/nvim-notify",
-        priority = 1000,
-        lazy = false,
-        config = function()
-            require("notify").setup({
-                background_colour = require("material.colors").backgrounds.floating_windows,
-                timeout = 2000,
-                render = "default",
-                stages = "fade"
-            })
-            vim.notify = require("notify")
-        end
-    }
 }

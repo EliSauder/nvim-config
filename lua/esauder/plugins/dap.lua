@@ -26,7 +26,8 @@ return {
         version = "*",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            "mfussenegger/nvim-dap"
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio"
         },
         config = function()
             local dap = require("dap")
