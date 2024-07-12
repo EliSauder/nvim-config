@@ -1,7 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        version = "*",
+        branch = "master",
         build = ":TSUpdate",
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         config = function()
@@ -59,6 +59,9 @@ return {
                 highlight = {
                     enable = true,
                     additional_vim_regex_highlighting = false
+                },
+                indent = {
+                    enable = true
                 }
             })
         end,
