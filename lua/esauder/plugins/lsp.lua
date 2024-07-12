@@ -164,17 +164,14 @@ local jsonls_lsp_handler = function()
         on_init = defaults.on_init,
         settings = {
             json = {
+                trace = {
+                    server = "off"
+                },
                 schemaDownload = {
                     enable = true,
                 },
-                schemas = {
-                    description = ".NET appsettings",
-                    fileMatch = {
-                        "appsettings.json",
-                        "appsettings.*.json"
-                    },
-                    url = "https://json.schemastore.org/appsettings.json"
-                }
+                schemas = require('schemastore').json.schemas(),
+                validate = { enable = true },
             }
         }
     })
@@ -205,7 +202,8 @@ return {
         dependencies = {
             "neovim/nvim-lspconfig",
             "williamboman/mason.nvim",
-            "hrsh7th/cmp-nvim-lsp"
+            "hrsh7th/cmp-nvim-lsp",
+            "b0o/schemastore.nvim",
         },
         config = function()
             require("mason-lspconfig").setup({
@@ -272,9 +270,7 @@ return {
     {
         "j-hui/fidget.nvim",
         version = "*",
-        config = function()
-            require('fidget').setup()
-        end
+        opts = {}
     }, --[[ Base Plugins ]] --
     {
         "neovim/nvim-lspconfig",
