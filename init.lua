@@ -1,30 +1,16 @@
--- Single file setup source: https://lazy.folke.io/installation
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-        vim.api.nvim_echo({
-            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out,                            "WarningMsg" },
-            { "\nPress any key to exit..." },
-        }, true, {})
-        vim.fn.getchar()
-        os.exit(1)
-    end
+local plugins = {
+  ts         = 'https://github.com/nvim-treesitter/nvim-treesitter',
+  ts_context = 'https://github.com/nvim-treesitter/nvim-treesitter-context',
+  -- ADD ADDITIONAL PLUGINS THAT ARE _NECESSARY_ TO REPRODUCE THE ISSUE
+}
+
+for name, url in pairs(plugins) do
+  local install_path = '/tmp/nvim/site/'..name
+  if vim.fn.isdirectory(install_path) == 0 then
+    vim.fn.system { 'git', 'clone', '--depth=1', url, install_path }
+  end
+  vim.o.runtimepath = install_path..','..vim.o.runtimepath
 end
-vim.opt.rtp:prepend(lazypath)
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- ADD INIT.LUA SETTINGS THAT IS _NECESSARY_ FOR REPRODUCING THE ISSUE
 
--- Setup lazy.nvim
-require("lazy").setup({
-    spec = {
-        -- add your plugins here
-    },
-})
