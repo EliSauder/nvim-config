@@ -89,13 +89,8 @@ local csharpls_lsp_handler = function()
             ["textDocument/definition"] = require('csharpls_extended').handler
         },
         on_attach = function(client, _)
-            if client.server_capabilities.documentFormattingProvider then
-                client.server_capabilities.documentFormattingProvider = false
-            end
-            if client.server_capabilities.documentRangeFormattingProvider then
-                client.server_capabilities.documentRangeFormattingProvider =
-                    false
-            end
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
         end
     })
 end
@@ -236,26 +231,6 @@ return {
         end
     },
     {
-        "jay-babu/mason-null-ls.nvim",
-        version = "*",
-        dependencies = {
-            "williamboman/mason.nvim"
-        },
-        config = function()
-            require('mason-null-ls').setup({
-                ensure_installed = {
-                    "commitlint",
-                    "clang-format",
-                    "yamlfmt"
-                },
-                automatic_installation = false,
-                handlers = {
-                    commitlint = commitlint_nonels_handler
-                }
-            })
-        end
-    },
-    {
         "mfussenegger/nvim-jdtls",
         version = "*",
     },
@@ -287,18 +262,6 @@ return {
                 enabled = true
             }
         }
-    },
-    {
-        "nvimtools/none-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        branch = "main",
-        dependencies = {
-            "jay-babu/mason-null-ls.nvim",
-            "nvim-lua/plenary.nvim"
-        },
-        config = function()
-            require("null-ls").setup({ sources = {} })
-        end
     },
     {
         "williamboman/mason.nvim",

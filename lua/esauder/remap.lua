@@ -100,7 +100,7 @@ vim.keymap.set("n", "<C-,>", function() require("trouble").previous({ skip_group
 ----------------------------------------------
 --[[              LSP KEYMAPS             ]]
 ----------------------------------------------
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
+vim.keymap.set("n", "<leader>f", function() require("conform").format({ async = true, lsp_format = "fallback" }) end)
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('esauder', {}),
