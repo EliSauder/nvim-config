@@ -1,5 +1,17 @@
 return {
     {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "luvit-meta/library", words = { "vim%.uv" } }
+            }
+        }
+    },
+    {
+        "Bilal2453/luvit-meta", lazy = true,
+    },
+    {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
@@ -13,7 +25,7 @@ return {
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
             "onsails/lspkind.nvim",
-            "lukas-reineke/cmp-under-comparator"
+            "lukas-reineke/cmp-under-comparator",
         },
         config = function()
             local cmp = require('cmp')
@@ -75,13 +87,14 @@ return {
                     })
                 },
                 sources = cmp.config.sources({
-                    { name = "nvim_lsp", priority = 8 },
-                    { name = 'luasnip', priority = 7, },
-                    { name = 'buffer', priority = 7 },
-                    { name = 'async_path', priority = 4 },
-                    { name = 'git', priority = 4 },
+                    { name = "lazydev",             group_index = 0 },
+                    { name = "nvim_lsp",            priority = 8,   group_index = 1 },
+                    { name = 'luasnip',             priority = 7,   group_index = 0 },
+                    { name = 'buffer',              priority = 7 },
+                    { name = 'async_path',          priority = 4 },
+                    { name = 'git',                 priority = 4 },
                     { name = 'conventionalcommits', priority = 3 },
-                    { name = 'cmdline', priority = 2 },
+                    { name = 'cmdline',             priority = 2 },
                 }),
                 formatting = {
                     format = require('lspkind').cmp_format({

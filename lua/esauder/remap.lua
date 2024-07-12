@@ -191,7 +191,7 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 --[[ NEOGEN ]]
 vim.keymap.set("n", "<leader>dc",
     function()
-        require('neogen').generate()
+        require('neogen').generate({})
     end, { noremap = true, silent = true })
 
 --[[ GIT FUGITIVE ]]
