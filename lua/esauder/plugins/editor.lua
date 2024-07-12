@@ -17,7 +17,7 @@ return {
             "theprimeagen/harpoon",
         },
         config = function()
-            require('telescope').setup()
+            require('telescope').setup({})
             require('telescope').load_extension('harpoon')
         end
     },
@@ -34,7 +34,7 @@ return {
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
-        opts = {}
+        config = true,
     },
     {
         "kylechui/nvim-surround",
