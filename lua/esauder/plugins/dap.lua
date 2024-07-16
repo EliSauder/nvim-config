@@ -1,7 +1,6 @@
 return {
     {
         "jay-babu/mason-nvim-dap.nvim",
-        version = "*",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "williamboman/mason.nvim",
@@ -16,14 +15,13 @@ return {
                     "cpptools",
                     "delve"
                 },
-                automatic_installation = false,
+                automatic_installation = true,
                 handlers = {}
             })
         end
     },
     {
         "rcarriga/nvim-dap-ui",
-        version = "*",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mfussenegger/nvim-dap",
@@ -32,8 +30,12 @@ return {
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
+            dapui.setup()
 
             dap.listeners.before.attach.dapui_config = function()
+                dapui.open()
+            end
+            dap.listeners.before.launch.dapui_config = function()
                 dapui.open()
             end
             dap.listeners.before.event_terminated.dapui_config = function()
@@ -47,7 +49,6 @@ return {
     {
         "theHamsta/nvim-dap-virtual-text",
         event = { "BufReadPre", "BufNewFile" },
-        branch = "master",
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-treesitter/nvim-treesitter"
@@ -69,6 +70,5 @@ return {
     },
     {
         "mfussenegger/nvim-dap",
-        version = "*",
     },
 }

@@ -4,8 +4,13 @@ return {
         ft = "lua",
         opts = {
             library = {
-                { path = "luvit-meta/library", words = { "vim%.uv" } }
-            }
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+                "nvim-dap-ui",
+            },
+            integrations = {
+                lspconfig = true,
+                cmp = true,
+            },
         }
     },
     {
