@@ -36,3 +36,5 @@ vim.opt.cursorline = true
 vim.opt.cursorcolumn = false
 
 vim.highlight.priorities.semantic_tokens = 95
+
+vim.wo.foldlevel = 99
