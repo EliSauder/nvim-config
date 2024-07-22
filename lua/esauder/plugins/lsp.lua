@@ -86,12 +86,14 @@ local csharpls_lsp_handler = function()
         capabilities = defaults.capabilities,
         on_init = defaults.on_init,
         handlers = {
-            ["textDocument/definition"] = require('csharpls_extended').handler
+            ["textDocument/definition"] = require('csharpls_extended').handler,
+            ["textDocument/typeDefinition"] = require('csharpls_extended').handler
         },
         on_attach = function(client, _)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
-        end
+        end,
+        cmd = { "csharpls" }
     })
 end
 
@@ -192,7 +194,6 @@ return {
     -- [[ MASON ]] --
     {
         "williamboman/mason-lspconfig.nvim",
-        version = "*",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "neovim/nvim-lspconfig",
@@ -232,7 +233,6 @@ return {
     },
     {
         "mfussenegger/nvim-jdtls",
-        version = "*",
     },
     {
         "Decodetalkers/csharpls-extended-lsp.nvim",
@@ -240,16 +240,13 @@ return {
             "cs",
             "csharp"
         },
-        branch = "master",
     },
     {
         "j-hui/fidget.nvim",
-        version = "*",
         opts = {}
     }, --[[ Base Plugins ]] --
     {
         "neovim/nvim-lspconfig",
-        version = "*",
         dependencies = {
             "j-hui/fidget.nvim"
         },
@@ -265,7 +262,6 @@ return {
     },
     {
         "williamboman/mason.nvim",
-        version = "*",
         config = function()
             require('mason').setup()
         end

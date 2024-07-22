@@ -2,7 +2,7 @@ return {
     -- Theme
     {
         "marko-cerovac/material.nvim",
-        branch = "main",
+        priority = 1000,
         config = function()
             require('material').setup({
                 contrast = {
@@ -45,13 +45,44 @@ return {
                     colors.editor.selection = "#363A92"
                 end,
             })
-
-            vim.g.material_style = "deep ocean"
         end
     },
     {
+        "folke/tokyonight.nvim",
+        priority = 1000,
+        opts = {
+            style = "storm",
+            term_colors = true,
+            transparent = false,
+        },
+    },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+        opts = {
+            term_colors = true,
+            transparent_background = true,
+            integrations = {
+                cmp = true,
+                gitsigns = true,
+                treesitter = true,
+                fidget = true,
+                harpoon = true,
+                mason = true,
+                dap = true,
+                semantic_tokens = true,
+                nvim_surround = true,
+                treesitter_context = true,
+                telescope = {
+                    enabled = true
+                },
+                lsp_trouble = true,
+            }
+        }
+    },
+    {
         "nvim-lualine/lualine.nvim",
-        branch = "master",
         event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -59,13 +90,13 @@ return {
         },
         opts = {
             options = {
-                theme = 'material-stealth'
-            }
+                component_separators = ' ',
+                section_separators = { left = ' ', right = ' ' },
+            },
         }
     },
     {
         "lewis6991/gitsigns.nvim",
-        version = "*",
         event = "VeryLazy",
         config = function()
             require('gitsigns').setup()
@@ -73,7 +104,6 @@ return {
     },
     {
         "prichrd/netrw.nvim",
-        branch = "master",
         lazy = false,
         dependencies = {
             "nvim-tree/nvim-web-devicons"

@@ -61,7 +61,6 @@ return {
     },
     {
         "leoluz/nvim-dap-go",
-        branch = "main",
         ft = "go",
         dependencies = {
             "mfussenegger/nvim-dap",

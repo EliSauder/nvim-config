@@ -10,7 +10,6 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-tree/nvim-web-devicons",
@@ -23,12 +22,10 @@ return {
     },
     {
         "mbbill/undotree",
-        branch = "master",
         event = "VeryLazy"
     },
     {
         "fedepujol/move.nvim",
-        branch = "main",
         event = "VeryLazy"
     },
     {
@@ -39,7 +36,6 @@ return {
     {
         "kylechui/nvim-surround",
         event = "InsertEnter",
-        version = "*",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "nvim-treesitter/nvim-treesitter",
@@ -50,14 +46,12 @@ return {
     },
     {
         "folke/trouble.nvim",
-        version = "*",
         dependencies = {
             "nvim-tree/nvim-web-devicons"
         }
     },
     {
         "danymat/neogen",
-        version = "*",
         dependencies = {
             "mfussenegger/nvim-dap",
             "L3MON4D3/LuaSnip",
@@ -79,7 +73,6 @@ return {
     },
     {
         "nvim-tree/nvim-web-devicons",
-        branch = "master",
         config = function()
             require("nvim-web-devicons").setup({
                 default = true,

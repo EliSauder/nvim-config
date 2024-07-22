@@ -1,20 +1,17 @@
 return {
     {
         "nvim-lua/plenary.nvim",
-        version = "*",
     },
 
     -- Git
     {
         "tpope/vim-fugitive",
-        version = "*",
         event = "VeryLazy"
     },
 
     -- CSV
     {
         "cameron-wags/rainbow_csv.nvim",
-        version = "*",
         config = true,
         ft = {
             'csv',

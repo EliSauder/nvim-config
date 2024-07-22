@@ -1,7 +1,6 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        branch = "master",
         build = ":TSUpdate",
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         config = function()
@@ -71,7 +70,6 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
-        branch = "master",
         event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter"
@@ -88,7 +86,6 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        branch = "master",
         dependencies = {
             "nvim-treesitter/nvim-treesitter"
         },
