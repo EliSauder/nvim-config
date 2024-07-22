@@ -93,7 +93,6 @@ local csharpls_lsp_handler = function()
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
         end,
-        cmd = { "csharpls" }
     })
 end
 
