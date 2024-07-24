@@ -12,6 +12,8 @@ local default_settings = function()
             })
     lspsettings.offsetEncodings = { "utf-8" }
     lspsettings.capabilities.offset_encoding = "utf-8"
+
+    vim.lsp.set_log_level("debug")
     return lspsettings
 end
 
@@ -192,10 +194,10 @@ end
 return {
     -- [[ MASON ]] --
     {
-        "williamboman/mason-lspconfig.nvim",
+        "EliSauder/mason-lspconfig.nvim",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            "neovim/nvim-lspconfig",
+            "EliSauder/nvim-lspconfig",
             "williamboman/mason.nvim",
             "hrsh7th/cmp-nvim-lsp",
             "b0o/schemastore.nvim",
@@ -216,6 +218,7 @@ return {
                     "taplo",
                     "gopls",
                     "zls",
+                    "superhtml",
                 },
                 handlers = {
                     default_lsp_handler,
@@ -245,7 +248,7 @@ return {
         opts = {}
     }, --[[ Base Plugins ]] --
     {
-        "neovim/nvim-lspconfig",
+        "EliSauder/nvim-lspconfig",
         dependencies = {
             "j-hui/fidget.nvim"
         },
@@ -262,7 +265,11 @@ return {
     {
         "williamboman/mason.nvim",
         config = function()
-            require('mason').setup()
+            require('mason').setup({
+                registries = {
+                    "github:EliSauder/mason-registry"
+                }
+            })
         end
     }
 }
