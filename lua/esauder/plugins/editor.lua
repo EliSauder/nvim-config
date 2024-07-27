@@ -1,5 +1,4 @@
 return {
-
     {
         "theprimeagen/harpoon",
         branch = "harpoon2",
@@ -10,8 +9,10 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
+        event = "VeryLazy",
         dependencies = {
-            "mfussenegger/nvim-dap",
+            "nvim-lua/plenary.nvim",
+            "BurntSushi/ripgrep",
             "nvim-tree/nvim-web-devicons",
             "theprimeagen/harpoon",
         },
@@ -26,12 +27,16 @@ return {
     },
     {
         "fedepujol/move.nvim",
-        event = "VeryLazy"
+        event = "VeryLazy",
+        opts = {}
     },
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
-        config = true,
+        opts = {
+            check_ts = true,
+            enable_check_bracket_line = false
+        }
     },
     {
         "kylechui/nvim-surround",
@@ -40,44 +45,39 @@ return {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "nvim-treesitter/nvim-treesitter",
         },
-        config = function()
-            require("nvim-surround").setup({})
-        end
+        opts = {}
     },
     {
         "folke/trouble.nvim",
         dependencies = {
             "nvim-tree/nvim-web-devicons"
-        }
+        },
+        opts = {},
+        cmd = "Trouble"
     },
     {
         "danymat/neogen",
         dependencies = {
-            "mfussenegger/nvim-dap",
             "L3MON4D3/LuaSnip",
             "nvim-treesitter/nvim-treesitter"
         },
-        config = function()
-            require('neogen').setup({
-                enabled = true,
-                snippet_engine = "luasnip",
-                languages = {
-                    cs = {
-                        template = {
-                            annotation_convention = "xmldoc"
-                        }
+        opts = {
+            enabled = true,
+            snippet_engine = "luasnip",
+            languages = {
+                cs = {
+                    template = {
+                        annotation_convention = "xmldoc"
                     }
                 }
-            })
-        end,
+            }
+        }
     },
     {
         "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("nvim-web-devicons").setup({
-                default = true,
-                strict = true,
-            })
-        end
+        opts = {
+            default = true,
+            strict = true,
+        }
     },
 }

@@ -1,28 +1,38 @@
+vim.api.nvim_create_autocmd("User", {
+    pattern = "DapStart",
+    group = "DapGroup",
+    callback = function()
+        require("lazy").load({
+            plugins = {
+                "jay-babu/mason-nvim-dap.nvim",
+                "rcarriga/nvim-dap-ui",
+                "theHamsta/nvim-dap-virtual-text",
+            }
+        })
+    end
+})
+
 return {
     {
         "jay-babu/mason-nvim-dap.nvim",
-        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "williamboman/mason.nvim",
             "mfussenegger/nvim-dap"
         },
-        config = function()
-            require("mason-nvim-dap").setup({
-                ensure_installed = {
-                    "bash",
-                    "coreclr",
-                    "codelldb",
-                    "cpptools",
-                    "delve"
-                },
-                automatic_installation = true,
-                handlers = {}
-            })
-        end
+        opts = {
+            ensure_installed = {
+                "bash",
+                "coreclr",
+                "codelldb",
+                "cpptools",
+                "delve"
+            },
+            automatic_installation = true,
+            handlers = {}
+        }
     },
     {
         "rcarriga/nvim-dap-ui",
-        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-neotest/nvim-nio"
@@ -48,16 +58,13 @@ return {
     },
     {
         "theHamsta/nvim-dap-virtual-text",
-        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-treesitter/nvim-treesitter"
         },
-        config = function()
-            require("nvim-dap-virtual-text").setup({
-                virt_text_pos = "inline"
-            })
-        end
+        opts = {
+            virt_text_pos = "inline"
+        }
     },
     {
         "leoluz/nvim-dap-go",
@@ -69,5 +76,11 @@ return {
     },
     {
         "mfussenegger/nvim-dap",
+        config = function()
+            vim.api.nvim_exec_autocmds("User", {
+                pattern = "DapStart",
+                group = "DapGroup",
+            })
+        end
     },
 }

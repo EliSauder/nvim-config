@@ -1,6 +1,9 @@
 return {
     {
         "folke/lazydev.nvim",
+        dependencies = {
+            "Bilal2453/luvit-meta"
+        },
         ft = "lua",
         opts = {
             library = {
@@ -31,6 +34,7 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "onsails/lspkind.nvim",
             "lukas-reineke/cmp-under-comparator",
+            "windwp/nvim-autopairs",
         },
         config = function()
             local cmp = require('cmp')
@@ -95,7 +99,7 @@ return {
                     { name = "lazydev",             group_index = 0 },
                     { name = "nvim_lsp",            priority = 8,   group_index = 1 },
                     { name = 'luasnip',             priority = 7,   group_index = 0 },
-                    { name = 'buffer',              priority = 7 },
+                    { name = 'buffer',              priority = 7,   group_index = 2 },
                     { name = 'async_path',          priority = 4 },
                     { name = 'git',                 priority = 4 },
                     { name = 'conventionalcommits', priority = 3 },
@@ -109,25 +113,24 @@ return {
                         menu = ({
                             buffer = "[Buffer]",
                             nvim_lsp = "[LSP]",
-                            luasnip = "[LuaSnip]",
+                            luasnip = "[Snip]",
                             git = "[Git]",
                             async_path = "[Path]",
                             conventionalcommits = "[CC]",
-                            cmdline = "[Cmd]"
+                            cmdline = "[Cmd]",
+                            lazydev = "[Lazy]"
                         })
                     }),
                 },
                 sorting = {
                     priority_weight = 1.0,
                     comparators = {
-                        cmp.config.compare.locality,
-                        cmp.config.compare.recently_used,
-                        cmp.config.compare.score,
                         cmp.config.compare.offset,
-                        cmp.config.compare.order,
-                        --cmp.config.compare.exact,
+                        cmp.config.compare.exact,
+                        cmp.config.compare.score,
                         require("cmp-under-comparator").under,
-                        --cmp.config.compare.kind,
+                        cmp.config.compare.kind,
+                        cmp.config.compare.recently_used,
                     }
                 }
             })
