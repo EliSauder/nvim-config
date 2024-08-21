@@ -193,7 +193,7 @@ return {
     -- [[ MASON ]] --
     {
         "williamboman/mason-lspconfig.nvim",
-        event = { "BufReadPre", "BufNewFile" },
+        event = { "BufReadPre", "BufNewFile", "BufEnter" },
         dependencies = {
             "neovim/nvim-lspconfig",
             "williamboman/mason.nvim",
@@ -216,6 +216,7 @@ return {
                     "taplo",
                     "gopls",
                     "zls",
+                    "helm_ls"
                 },
                 handlers = {
                     default_lsp_handler,

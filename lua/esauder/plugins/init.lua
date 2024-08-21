@@ -37,5 +37,10 @@ return {
         config = function()
             require("neoconf").setup()
         end
+    },
+    {
+        'towolf/vim-helm',
+        lazy = false,
+        ft = 'helm'
     }
 }

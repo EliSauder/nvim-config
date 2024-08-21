@@ -37,8 +37,8 @@ return {
                     "lua",
                     "luap",
                     "make",
-                    "markdown",
-                    "markdown_inline",
+                    -- "markdown",
+                    -- "markdown_inline",
                     "query",
                     "regex",
                     "rust",
@@ -51,7 +51,8 @@ return {
                     "vimdoc",
                     "xml",
                     "yaml",
-                    "zig"
+                    "zig",
+                    "helm"
                 },
                 sync_install = false,
                 auto_install = false,
